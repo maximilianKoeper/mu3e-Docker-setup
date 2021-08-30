@@ -64,8 +64,45 @@ gpasswd -a user docker [replace user with your username]
 ```
 
 # Docker installation on Ubuntu:
+[Full instruction on installing docker on ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 
-## Setting up mu3e docker container
+1. **update apt index and install packages for installation**
+```
+sudo apt-get update
+
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+```
+
+2. **Add docker gpg-key**
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+3. **Setting up stable repo for docker**
+```
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+4. **Update apt index and install docker**
+
+```
+apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+5. **(optional) Verify that docker is working**
+```
+sudo docker run hello-world
+```
+
+# Setting up mu3e docker container
 1. **Check that everything is set up correctly**  
 Linux shell:
 ```
