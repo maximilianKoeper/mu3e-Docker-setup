@@ -1,6 +1,5 @@
 # mu3e-docker-setup
 
-# Docker installation on Windows: 
 [Full instructions on installing docker with wsl2 on windows](https://docs.docker.com/docker-for-windows/wsl/)  
 - Virtualization must be activated in BIOS / UEFI
 - At least. 4 GB RAM is required (> 8GB recommended)
@@ -39,70 +38,7 @@ apt dist-upgrade
 1. **Download Docker Desktop** [here](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
 2. **Enable wsl2 integation in Docker: Settings/Resources/wsl integration**
 
-# Docker installation on Arch based disributions:
-
-1. **Install the docker package:**
-```
-pacman -S docker
-```
-2. **Start the docker service:**
-```
-systemctl start docker.service
- 
-systemctl enable docker.service
-```
-3. **Verify the installation:**
-```
-docker info
-```
-4. **(optional) add user to docker group to run docker without ```sudo```**
-```
-groupadd docker
- 
-gpasswd -a user docker [replace user with your username]
-
-```
-
-# Docker installation on Ubuntu:
-[Full instruction on installing docker on ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-
-1. **update apt index and install packages for installation**
-```
-sudo apt-get update
-
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-```
-
-2. **Add docker gpg-key**
-```
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-```
-
-3. **Setting up stable repo for docker**
-```
-echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-4. **Update apt index and install docker**
-
-```
-apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-```
-
-5. **(optional) Verify that docker is working**
-```
-sudo docker run hello-world
-```
-
-# Setting up mu3e docker container
+## Setting up mu3e docker container
 1. **Check that everything is set up correctly**  
 Linux shell:
 ```
@@ -122,10 +58,10 @@ If permission is denied try:
 sudo docker pull 4ndr85/mu3e:v2
 ```
 
-3. **Run Docker  Image**   
+3. **Create Docker container**   
 Linux shell:
 ```
-sudo docker run -it 4ndr85/mu3e:v2 bash
+sudo docker run -it --name mu3e 4ndr85/mu3e:v2 bash
 ```   
 Inside the container, first thing to do is to set the environment:
 ```
@@ -135,6 +71,11 @@ To exit the container type:
 ```
 exit
 ```
+To start the container again:
+```
+sudo docker start mu3e -i
+```
+
 
 4. **Copying files between local system and container**   
 To copy files between yout local system and the Docker container type:
