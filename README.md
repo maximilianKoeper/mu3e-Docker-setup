@@ -52,7 +52,7 @@ Linux shell:
 docker pull 4ndr85/mu3e:v2
 ```   
 
-    If permission is denied try:
+If permission is denied try:
 
 ```
 sudo docker pull 4ndr85/mu3e:v2
