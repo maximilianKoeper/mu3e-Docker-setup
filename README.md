@@ -46,31 +46,31 @@ docker --version
 Docker version 20.10.8, build *******
 ```
 
-2. **Pull Docker image** 
+2. **Pull Docker image**   
 Linux shell:
 ```
 docker pull 4ndr85/mu3e:v2
-``` 
+```   
 If permission is denied try:
 ```
 sudo docker pull 4ndr85/mu3e:v2
 ```
 
-3. **Run Docker  Image** 
+3. **Run Docker  Image**   
 Linux shell:
 ```
 sudo docker run -it 4ndr85/mu3e:v2 bash
-``` 
+```   
 Inside the container, first thing to do is to set the environment:
 ```
 source initialize.sh
-``` 
+```   
 To exit the container type:
 ```
 exit
 ```
 
-4. **Copying files between local system and container** 
+4. **Copying files between local system and container**   
 To copy files between yout local system and the Docker container type:
 ```
 docker cp containerID:path/to/file/to/copy/inside/container path/local/machine/where/to/copy
