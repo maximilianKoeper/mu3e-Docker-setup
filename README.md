@@ -46,33 +46,33 @@ docker --version
 Docker version 20.10.8, build *******
 ```
 
-2. **Pull Docker image**
+2. **Pull Docker image** 
 Linux shell:
 ```
 docker pull 4ndr85/mu3e:v2
-```
+``` 
 If permission is denied try:
 ```
 sudo docker pull 4ndr85/mu3e:v2
 ```
 
-3. **Run Docker  Image**
+3. **Run Docker  Image** 
 Linux shell:
 ```
 sudo docker run -it 4ndr85/mu3e:v2 bash
-```
+``` 
 Inside the container, first thing to do is to set the environment:
 ```
 source initialize.sh
-```
+``` 
 To exit the container type:
 ```
 exit
 ```
 
-4. **Copying files between local system and container**
+4. **Copying files between local system and container** 
 To copy files between yout local system and the Docker container type:
 ```
 docker cp containerID:path/to/file/to/copy/inside/container path/local/machine/where/to/copy
-```
+``` 
 For instance, ```docker cp e442:/mu3e/tests/data/mu3e_run_000042.root``` will copy the file mu3e_run_000042.root from the data folder inside the container e442 (your container ID might be different) to the current directory on your local machine. To transfer file from the host machine to the container the order of the two paths, in the previous example, must be swapped. 
