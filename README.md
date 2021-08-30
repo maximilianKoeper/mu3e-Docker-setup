@@ -1,5 +1,6 @@
 # mu3e-docker-setup
 
+# Docker installation on Windows: 
 [Full instructions on installing docker with wsl2 on windows](https://docs.docker.com/docker-for-windows/wsl/)  
 - Virtualization must be activated in BIOS / UEFI
 - At least. 4 GB RAM is required (> 8GB recommended)
@@ -37,6 +38,32 @@ apt dist-upgrade
 
 1. **Download Docker Desktop** [here](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
 2. **Enable wsl2 integation in Docker: Settings/Resources/wsl integration**
+
+# Docker installation on Arch based disributions:
+
+1. **Install the docker package:**
+```
+pacman -S docker
+```
+2. **Start the docker service:**
+```
+systemctl start docker.service
+ 
+systemctl enable docker.service
+```
+3. **Verify the installation:**
+```
+docker info
+```
+4. **(optional) add user to docker group to run docker without ```sudo```**
+```
+groupadd docker
+ 
+gpasswd -a user docker [replace user with your username]
+
+```
+
+# Docker installation on Ubuntu:
 
 ## Setting up mu3e docker container
 1. **Check that everything is set up correctly**  
