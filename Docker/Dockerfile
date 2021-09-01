@@ -24,4 +24,6 @@ RUN cd yay \
 
 RUN yay -S geant4 --noconfirm
 
+RUN yay -S --noconfirm geant4-abladata geant4-incldata geant4-ensdfstatedata geant4-ledata geant4-levelgammadata geant4-neutronhpdata geant4-particlexsdata geant4-piidata geant4-radioactivedata geant4-realsurfacedata geant4-saiddata bxdecay0-geant4
+
 USER root
