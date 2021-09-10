@@ -1,10 +1,13 @@
 FROM archlinux:latest
 
+RUN echo 'root:admin' | chpasswd
 # setting up arch distro
 RUN pacman -Syu --noconfirm
 
 # downloading packages for mu3e
 RUN pacman -S --noconfirm git cmake eigen boost gcc root fakeroot sudo make go nano vim subversion gcc-fortran
+
+RUN pacman -S --noconfirm xorg-xauth mesa-demos
 
 ARG user=pkgbuilder
 RUN useradd -m -r -s /bin/bash $user \
