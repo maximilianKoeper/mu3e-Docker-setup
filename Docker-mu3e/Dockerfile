@@ -15,4 +15,5 @@ RUN cd /home/user/mu3e \
     && make -j8 \
     && make install \
     && cd ../.. \
-    && cp mu3e/run mu3e_installation/run -r
+    && cp mu3e/run run -r \
+    && rm -rf mu3e
