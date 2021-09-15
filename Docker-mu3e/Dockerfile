@@ -11,6 +11,8 @@ RUN chmod 777 /home/user/mu3e
 RUN cd /home/user/mu3e \
     && mkdir build \
     && cd build \
-    && cmake -DMU3E_DISPLAY=ON .. \
+    && cmake -DCMAKE_INSTALL_PREFIX=/home/user/mu3e_installation -DMU3E_DISPLAY=ON .. \
     && make -j8 \
-    && make install
+    && make install \
+    && cd ../.. \
+    && cp mu3e/run mu3e_installation/run -r
