@@ -1,4 +1,4 @@
-# Dockerfile for mu3e simulation
+# Dockerfile for geant4 
 
 # Includes:
 - ROOT
