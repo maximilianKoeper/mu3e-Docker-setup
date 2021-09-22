@@ -5,7 +5,7 @@ FROM mwjk03/geant4-arch:latest
 # RUN pacman -S --noconfirm xorg-xauth mesa-demos
 
 RUN pacman -Syy --noconfirm \
-    && pacman -S pkg-config gtkmm3
+    && pacman -S --noconfirm pkg-config gtkmm3
 
 ADD mu3e /home/user/mu3e
 
