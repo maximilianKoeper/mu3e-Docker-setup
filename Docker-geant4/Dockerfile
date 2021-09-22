@@ -2,7 +2,7 @@ FROM archlinux:latest
 
 RUN echo 'root:admin' | chpasswd
 # setting up arch distro
-RUN pacman -Syu --noconfirm
+RUN pacman -Syyu --noconfirm
 
 # downloading packages for mu3e
 RUN pacman -S --noconfirm git cmake eigen boost gcc root fakeroot sudo make go nano vim subversion gcc-fortran
