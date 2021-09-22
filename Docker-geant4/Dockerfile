@@ -23,7 +23,8 @@ RUN cd yay \
   && makepkg -sri --needed --noconfirm \
   && cd \
   # Clean up
-  && rm -rf .cache yay
+  && rm -rf .cache yay \
+  && touch /root/.Xauthority
 
 RUN yay
 
