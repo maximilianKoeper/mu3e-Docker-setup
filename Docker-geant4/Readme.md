@@ -16,8 +16,6 @@ sudo docker run --net=host --env="DISPLAY=:0.0" --user $(id -u):$(id -g) --volum
 ### or
 ```
 sudo docker run --net=host --env="DISPLAY=:0.0" --volume=/tmp/.X11-unix:/tmp/.X11-unix --device=/dev/dri -it --name geant4-arch-2 mwjk03/geant4-arch:latest
-
-touch /root/.Xauthority
 ```
 on your host machine type ```xauth list ``` and copy one line
 
