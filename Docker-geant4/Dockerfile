@@ -12,8 +12,8 @@ RUN useradd -m -r -s /bin/bash $user \
   && passwd -d $user
 
 # Install yay
-RUN git clone https://aur.archlinux.org/yay.git
-RUN sudo chmod 777 /yay/
+RUN git clone https://aur.archlinux.org/yay.git \
+  sudo chmod 777 /yay/
 
 USER $user
 RUN cd yay \
