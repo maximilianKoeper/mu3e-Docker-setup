@@ -8,8 +8,7 @@ RUN yum update -y \
     && yum -y install devtoolset-9 \
                       nano vim \
     && yum -y install epel-release \
-    && yum -y install root \
-                      git \
+    && yum -y install git \
                       cmake3 \
                       gcc-fortran \
                       eigen3-devel \
