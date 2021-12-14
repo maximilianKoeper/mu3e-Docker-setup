@@ -5,10 +5,10 @@ RUN echo 'root:admin' | chpasswd
 
 RUN yum update -y \
     && yum -y install centos-release-scl \
-                      devtoolset-9 \
+    && yum -y install devtoolset-9 \
                       nano vim \
-                      epel-release \
-                      root \
+    && yum -y install epel-release \
+    && yum -y install root \
                       git \
                       cmake3 \
                       gcc-fortran \
@@ -26,11 +26,10 @@ RUN yum update -y \
                       libXext-devel \
                       python \
                       openssl-devel \
-
     && yum clean all
 
-
-RUN source scl_source enable devtoolset-9 \
+#SHELL ["/bin/bash", "-c"]
+RUN source /opt/rh/devtoolset-9/enable \
     && wget https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.gz \
     && tar zxvf boost_1_78_0.tar.gz \
     && cd boost_1_78_0/ \
@@ -39,13 +38,13 @@ RUN source scl_source enable devtoolset-9 \
 
 ENV BOOST_ROOT=/usr/local/include/boost
 
-RUN source scl_source enable devtoolset-9 \
+RUN source /opt/rh/devtoolset-9/enable \
     && git clone --branch latest-stable https://github.com/root-project/root.git root_src \
     && mkdir root_build root_install && cd root_build \
     && cmake3 -DCMAKE_INSTALL_PREFIX=/root_install ../root_src \
     && cmake3 --build . -- install -j7
 
-RUN source scl_source enable devtoolset-9 \
+RUN source /opt/rh/devtoolset-9/enable \
     && git clone https://gitlab.cern.ch/geant4/geant4.git \
     && cd /geant4 \
     && mkdir geant4-build \
