@@ -35,7 +35,7 @@ RUN source /opt/rh/devtoolset-9/enable \
     && cd boost_1_78_0/ \
     && ./bootstrap.sh --prefix=/usr/local/include/boost \
     && ./b2 install --prefix=/usr/local/include/boost --with=all \
-    && rm boost_1_78_0.tar.gz
+    && rm /boost_1_78_0.tar.gz
 
 ENV BOOST_ROOT=/usr/local/include/boost
 
