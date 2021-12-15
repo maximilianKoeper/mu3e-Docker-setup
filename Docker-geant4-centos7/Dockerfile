@@ -41,7 +41,7 @@ ENV BOOST_ROOT=/usr/local/include/boost
 RUN source /opt/rh/devtoolset-9/enable \
     && git clone --branch latest-stable https://github.com/root-project/root.git root_src \
     && mkdir root_build root_install && cd root_build \
-    && cmake3 -DCMAKE_INSTALL_PREFIX=/root_install ../root_src \
+    && cmake3 -DCMAKE_INSTALL_PREFIX=/root_install -DCMAKE_CXX_STANDARD=17 ../root_src \
     && cmake3 --build . -- install -j7
 
 RUN source /opt/rh/devtoolset-9/enable \
@@ -56,7 +56,7 @@ RUN source /opt/rh/devtoolset-9/enable \
               -DCMAKE_C_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/gcc \
               -DCMAKE_CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/g++ \
              .. \
-    && make -j8 \
+    && make -j7 \
     && make install \
     && source /geant4-install/bin/geant4.sh \
     && cd / \
