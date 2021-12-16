@@ -1,7 +1,9 @@
 FROM centos:centos7
 MAINTAINER Maximilian Köper <maximilian.koeper@kip.uni-heidelberg.de>
 
-RUN echo 'root:admin' | chpasswd
+ARG NUMBER_CORES=7
+
+#RUN echo 'root:admin' | chpasswd
 
 RUN yum update -y \
     && yum -y install centos-release-scl \
@@ -25,6 +27,7 @@ RUN yum update -y \
                       libXext-devel \
                       python \
                       openssl-devel \
+                      qt-devel \
     && yum clean all
 
 #SHELL ["/bin/bash", "-c"]
@@ -34,7 +37,8 @@ RUN source /opt/rh/devtoolset-9/enable \
     && cd boost_1_78_0/ \
     && ./bootstrap.sh --prefix=/usr/local/include/boost \
     && ./b2 install --prefix=/usr/local/include/boost --with=all \
-    && rm /boost_1_78_0.tar.gz
+    && rm /boost_1_78_0.tar.gz \
+    && rm -rf /boost_1_78_0
 
 ENV BOOST_ROOT=/usr/local/include/boost
 
@@ -42,7 +46,11 @@ RUN source /opt/rh/devtoolset-9/enable \
     && git clone --branch latest-stable https://github.com/root-project/root.git root_src \
     && mkdir root_build root_install && cd root_build \
     && cmake3 -DCMAKE_INSTALL_PREFIX=/root_install -DCMAKE_CXX_STANDARD=17 ../root_src \
-    && cmake3 --build . -- install -j7
+    && cmake3 --build . -- install -j${NUMBER_CORES} \
+    && rm -rf /root_build \
+    && rm -rf /root_src
+
+RUN yum -y install qt5-qtbase-devel
 
 RUN source /opt/rh/devtoolset-9/enable \
     && git clone https://gitlab.cern.ch/geant4/geant4.git \
@@ -53,10 +61,11 @@ RUN source /opt/rh/devtoolset-9/enable \
               -DGEANT4_INSTALL_DATA=ON \
               -DGEANT4_BUILD_MULTITHREADED=ON \
               -DGEANT4_USE_GDML=ON \
+              -DGEANT4_USE_QT=ON \
               -DCMAKE_C_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/gcc \
               -DCMAKE_CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/g++ \
              .. \
-    && make -j7 \
+    && make -j${NUMBER_CORES} \
     && make install \
     && source /geant4-install/bin/geant4.sh \
     && cd / \
@@ -81,5 +90,8 @@ RUN source /opt/rh/devtoolset-9/enable \
 #    && cd ../run/ \
 #    && mkdir data
 
+COPY entry-point.sh /entry-point.sh
+RUN chmod 644 /entry-point.sh
 
-CMD ["/usr/bin/bash"]
+#ENTRYPOINT ["/entry-point.sh"]
+#CMD ["/bin/bash"]
