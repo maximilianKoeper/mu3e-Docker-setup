@@ -1,12 +1,5 @@
 FROM mwjk03/geant4-arch:latest
 
-# RUN echo 'root:admin' | chpasswd
-
-# RUN pacman -S --noconfirm xorg-xauth mesa-demos
-
-RUN pacman -Syy --noconfirm \
-    && pacman -S --noconfirm pkg-config gtkmm3
-
 ADD mu3e /home/user/mu3e
 
 RUN chmod 777 /home/user/mu3e

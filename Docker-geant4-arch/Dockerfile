@@ -2,10 +2,29 @@ FROM archlinux:latest
 
 RUN echo 'root:admin' | chpasswd \
   && touch /root/.Xauthority
-  
+
 # setting up arch distro
 RUN pacman -Syyu --noconfirm \
-  && pacman -S --noconfirm git cmake eigen boost gcc root fakeroot sudo make go nano vim subversion gcc-fortran xorg-xauth mesa-demos
+  && pacman -S --noconfirm git \
+                           && cmake \
+                           && eigen \
+                           && boost \
+                           && gcc \
+                           && root \
+                           && fakeroot \
+                           && sudo \
+                           && make \
+                           && go \
+                           & nano \
+                           && vim \
+                           && subversion \
+                           && gcc-fortran \
+                           && xorg-xauth \
+                           && mesa-demos \
+                           && pkg-config \
+                           && gtkmm3 \
+  && pacman -Sc
+
 
 ARG user=pkgbuilder
 RUN useradd -m -r -s /bin/bash $user \
@@ -24,11 +43,21 @@ RUN cd yay \
 
 RUN yay
 
-RUN yay -S geant4 --noconfirm
+RUN yay -S geant4 --noconfirm \
+    && yay -S --noconfirm geant4-abladata \
+                          && geant4-incldata \
+                          && geant4-ensdfstatedata \
+                          && geant4-ledata \
+                          && geant4-levelgammadata \
+                          && geant4-neutronhpdata \
+                          && geant4-particlexsdata \
+                          && geant4-piidata \
+                          && geant4-radioactivedata \
+                          && geant4-realsurfacedata \
+                          && geant4-saiddata \
+                          && bxdecay0-geant4 \
+    && yay -Sc --aur
 
-RUN yay -S --noconfirm geant4-abladata geant4-incldata geant4-ensdfstatedata geant4-ledata geant4-levelgammadata geant4-neutronhpdata geant4-particlexsdata geant4-piidata geant4-radioactivedata geant4-realsurfacedata geant4-saiddata bxdecay0-geant4
-
-# RUN yay -S --noconfirm clhep
 ENV G4ENSDFSTATEDATA=/usr/share/geant4-ensdfstatedata/G4ENSDFSTATE2.3 \
     G4LEVELGAMMADATA=/usr/share/geant4-levelgammadata/PhotonEvaporation5.7 \
     G4LEDATA=/usr/share/geant4-ledata/G4EMLOW7.13 \
