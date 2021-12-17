@@ -6,24 +6,24 @@ RUN echo 'root:admin' | chpasswd \
 # setting up arch distro
 RUN pacman -Syyu --noconfirm \
   && pacman -S --noconfirm git \
-                           && cmake \
-                           && eigen \
-                           && boost \
-                           && gcc \
-                           && root \
-                           && fakeroot \
-                           && sudo \
-                           && make \
-                           && go \
-                           & nano \
-                           && vim \
-                           && subversion \
-                           && gcc-fortran \
-                           && xorg-xauth \
-                           && mesa-demos \
-                           && pkg-config \
-                           && gtkmm3 \
-  && pacman -Sc
+                           cmake \
+                           eigen \
+                           boost \
+                           gcc \
+                           root \
+                           fakeroot \
+                           sudo \
+                           make \
+                           go \
+                           nano \
+                           vim \
+                           subversion \
+                           gcc-fortran \
+                           xorg-xauth \
+                           mesa-demos \
+                           pkg-config \
+                           gtkmm3 \
+  && pacman -Sc --noconfirm
 
 
 ARG user=pkgbuilder
