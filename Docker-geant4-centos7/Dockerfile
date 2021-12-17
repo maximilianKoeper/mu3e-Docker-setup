@@ -27,7 +27,7 @@ RUN yum update -y \
                       libXext-devel \
                       python \
                       openssl-devel \
-                      qt-devel \
+                      qt5-qtbase-devel \
     && yum clean all
 
 #SHELL ["/bin/bash", "-c"]
@@ -49,8 +49,6 @@ RUN source /opt/rh/devtoolset-9/enable \
     && cmake3 --build . -- install -j${NUMBER_CORES} \
     && rm -rf /root_build \
     && rm -rf /root_src
-
-RUN yum -y install qt5-qtbase-devel
 
 RUN source /opt/rh/devtoolset-9/enable \
     && git clone https://gitlab.cern.ch/geant4/geant4.git \
@@ -75,23 +73,8 @@ RUN source /opt/rh/devtoolset-9/enable \
     && rm -rf /geant4/
 
 
-
-#ADD mu3e /mu3e
-#RUN source root_install/bin/thisroot.sh \
-#    && cd /mu3e \
-#    && git checkout master \
-#    && mkdir build \
-#    && cd build \
-#    && cmake3 -DCMAKE_C_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/gcc \
-#              -DCMAKE_CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/g++ \
-#             .. \
-#    && make -j8 \
-#    && make install \
-#    && cd ../run/ \
-#    && mkdir data
-
-COPY entry-point.sh /entry-point.sh
-RUN chmod 644 /entry-point.sh
+COPY setup.sh /setup.sh
+RUN chmod 644 /setup.sh
 
 #ENTRYPOINT ["/entry-point.sh"]
 #CMD ["/bin/bash"]
