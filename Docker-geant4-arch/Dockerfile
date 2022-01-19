@@ -45,17 +45,17 @@ RUN yay
 
 RUN yay -S geant4 --noconfirm \
     && yay -S --noconfirm geant4-abladata \
-                          && geant4-incldata \
-                          && geant4-ensdfstatedata \
-                          && geant4-ledata \
-                          && geant4-levelgammadata \
-                          && geant4-neutronhpdata \
-                          && geant4-particlexsdata \
-                          && geant4-piidata \
-                          && geant4-radioactivedata \
-                          && geant4-realsurfacedata \
-                          && geant4-saiddata \
-                          && bxdecay0-geant4 \
+                        bxdecay0-geant4-git \
+                        geant4-incldata \
+                        geant4-ensdfstatedata \
+                        geant4-ledata \
+                        geant4-levelgammadata \
+                        geant4-neutronhpdata \
+                        geant4-particlexsdata \
+                        geant4-piidata \
+                        geant4-radioactivedata \
+                        geant4-realsurfacedata \
+                        geant4-saiddata \
     && yay -Sc --aur
 
 ENV G4ENSDFSTATEDATA=/usr/share/geant4-ensdfstatedata/G4ENSDFSTATE2.3 \
