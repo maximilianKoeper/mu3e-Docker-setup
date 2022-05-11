@@ -6,6 +6,7 @@ RUN echo 'root:admin' | chpasswd \
 # setting up arch distro
 RUN pacman -Syyu --noconfirm \
   && pacman -S --noconfirm git \
+                           base-devel \
                            cmake \
                            eigen \
                            boost \
@@ -14,7 +15,6 @@ RUN pacman -Syyu --noconfirm \
                            fakeroot \
                            sudo \
                            make \
-                           go \
                            nano \
                            vim \
                            subversion \
@@ -32,18 +32,15 @@ RUN useradd -m -r -s /bin/bash $user \
   && passwd -d $user
 
 # Install yay
-RUN git clone https://aur.archlinux.org/yay.git \
-  && sudo chmod 777 /yay/
+RUN git clone https://aur.archlinux.org/yay-bin.git \
+  && sudo chmod 777 /yay-bin/
 
 USER $user
-RUN cd yay \
-  && makepkg -sri --needed --noconfirm \
-  && cd \
-  && rm -rf .cache yay
 
-RUN yay
-
-RUN yay -S geant4 --noconfirm \
+RUN cd /yay-bin/ \
+    && makepkg -si --needed --noconfirm \
+    && yay \
+    && yay -S geant4 --noconfirm \
     && yay -S --noconfirm geant4-abladata \
                         bxdecay0-geant4-git \
                         geant4-incldata \
@@ -68,6 +65,7 @@ ENV G4ENSDFSTATEDATA=/usr/share/geant4-ensdfstatedata/G4ENSDFSTATE2.3 \
     G4PIIDATA=/usr/share/geant4-piidata/G4PII1.3 \
     G4RADIOACTIVEDATA=/usr/share/geant4-radioactivedata/RadioactiveDecay5.4 \
     G4REALSURFACEDATA=/usr/share/geant4-realsurfacedata/RealSurface2.2 \
-    G4SAIDXSDATA=/usr/share/geant4-saiddata/G4SAIDDATA2.0
+    G4SAIDXSDATA=/usr/share/geant4-saiddata/G4SAIDDATA2.0 \
+    QT_X11_NO_MITSHM=1
 
 USER root
