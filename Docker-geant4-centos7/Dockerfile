@@ -74,7 +74,5 @@ RUN source /opt/rh/devtoolset-9/enable \
     && rm -rf /geant4/
 
 
-COPY setup.sh /setup.sh
-RUN chmod +x /setup.sh
-
-CMD ["/bin/bash", "/setup.sh"]
+COPY setup.sh /etc/profile.d/setup.sh
+RUN chmod +x /etc/profile.d/setup.sh
