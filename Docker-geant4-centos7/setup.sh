@@ -8,3 +8,5 @@ source /opt/rh/devtoolset-9/enable
 
 ldconfig
 echo "Environment is ready to use"
+
+/bin/bash

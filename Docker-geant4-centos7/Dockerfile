@@ -1,5 +1,6 @@
 FROM centos:centos7
-MAINTAINER Maximilian Köper <maximilian.koeper@kip.uni-heidelberg.de>
+LABEL Author="Maximilian Köper" \
+      Mail="maximilian.koeper@kip.uni-heidelberg.de"
 
 ARG NUMBER_CORES=7
 
@@ -32,13 +33,13 @@ RUN yum update -y \
 
 #SHELL ["/bin/bash", "-c"]
 RUN source /opt/rh/devtoolset-9/enable \
-    && wget https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.gz \
-    && tar zxvf boost_1_78_0.tar.gz \
-    && cd boost_1_78_0/ \
+    && wget https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.gz \
+    && tar zxvf boost_1_79_0.tar.gz \
+    && cd boost_1_79_0/ \
     && ./bootstrap.sh --prefix=/usr/local/include/boost \
     && ./b2 install --prefix=/usr/local/include/boost --with=all \
-    && rm /boost_1_78_0.tar.gz \
-    && rm -rf /boost_1_78_0
+    && rm /boost_1_79_0.tar.gz \
+    && rm -rf /boost_1_79_0
 
 ENV BOOST_ROOT=/usr/local/include/boost
 
@@ -74,7 +75,6 @@ RUN source /opt/rh/devtoolset-9/enable \
 
 
 COPY setup.sh /setup.sh
-RUN chmod 644 /setup.sh
+RUN chmod +x /setup.sh
 
-#ENTRYPOINT ["/entry-point.sh"]
-#CMD ["/bin/bash"]
+CMD ["/bin/bash", "/setup.sh"]

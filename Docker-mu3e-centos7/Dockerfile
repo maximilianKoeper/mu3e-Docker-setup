@@ -16,4 +16,6 @@ RUN source /setup.sh \
     && mkdir data
 
 COPY setup.sh /setup.sh
-RUN chmod 777 /setup.sh
+RUN chmod +x /setup.sh
+
+CMD ["/bin/bash", "/setup.sh"]

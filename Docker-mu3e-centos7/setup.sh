@@ -9,3 +9,5 @@ source /mu3e/install/activate.sh
 
 ldconfig
 echo "Environment is ready to use"
+
+/bin/bash

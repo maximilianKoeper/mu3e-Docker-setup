@@ -23,7 +23,7 @@ RUN pacman -Syyu --noconfirm \
                            mesa-demos \
                            pkg-config \
                            gtkmm3 \
-  && pacman -Sc --noconfirm
+  && yes|pacman -Scc
 
 
 ARG user=pkgbuilder
@@ -53,7 +53,7 @@ RUN cd /yay-bin/ \
                         geant4-radioactivedata \
                         geant4-realsurfacedata \
                         geant4-saiddata \
-    && yay -Sc --aur
+    && yes|yay -Scc
 
 ENV G4ENSDFSTATEDATA=/usr/share/geant4-ensdfstatedata/G4ENSDFSTATE2.3 \
     G4LEVELGAMMADATA=/usr/share/geant4-levelgammadata/PhotonEvaporation5.7 \
