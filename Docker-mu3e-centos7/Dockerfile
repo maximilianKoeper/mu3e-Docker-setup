@@ -15,7 +15,6 @@ RUN source /setup.sh \
     && cd ../run/ \
     && mkdir data
 
-COPY setup.sh /setup.sh
-RUN chmod +x /setup.sh
 
-CMD ["/bin/bash", "/setup.sh"]
+COPY setup.sh /etc/profile.d/setup_mu3e.sh
+RUN chmod +x /etc/profile.d/setup_mu3e.sh

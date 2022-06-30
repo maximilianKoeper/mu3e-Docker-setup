@@ -74,5 +74,5 @@ RUN source /opt/rh/devtoolset-9/enable \
     && rm -rf /geant4/
 
 
-COPY setup.sh /etc/profile.d/setup.sh
-RUN chmod +x /etc/profile.d/setup.sh
+COPY setup.sh /etc/profile.d/setup_geant4_env.sh
+RUN chmod +x /etc/profile.d/setup_geant4_env.sh
